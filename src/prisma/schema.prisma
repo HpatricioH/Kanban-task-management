@@ -10,34 +10,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Boards {
+model boards {
   id    String    @id @default(auto()) @map("_id") @db.ObjectId
   name  String
-  posts Columns[]
+  posts columns[]
 }
 
-model Columns {
+model columns {
   id      String  @id @default(auto()) @map("_id") @db.ObjectId
   name    String
   boardId String  @db.ObjectId
-  boards  Boards  @relation(fields: [boardId], references: [id])
-  tasks   Tasks[]
+  boards  boards  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  tasks   tasks[]
 }
 
-model Tasks {
+model tasks {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   columnId    String     @db.ObjectId
-  columns     Columns    @relation(fields: [columnId], references: [id])
+  columns     columns    @relation(fields: [columnId], references: [id])
   title       String
   description String
   status      String
-  subTasks    SubTasks[]
+  subTasks    subTasks[]
 }
 
-model SubTasks {
+model subTasks {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   taskId      String  @db.ObjectId
-  tasks       Tasks   @relation(fields: [taskId], references: [id])
+  tasks       tasks   @relation(fields: [taskId], references: [id])
   title       String
   isCompleted Boolean
 }
