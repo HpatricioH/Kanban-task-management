@@ -1,43 +1,43 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
-model boards {
-  id    String    @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  posts columns[]
+generator client {
+  provider = "prisma-client-js"
 }
 
-model columns {
+model Boards {
+  id      String    @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  columns Columns[]
+}
+
+model Columns {
   id      String  @id @default(auto()) @map("_id") @db.ObjectId
   name    String
   boardId String  @db.ObjectId
-  boards  boards  @relation(fields: [boardId], references: [id], onDelete: Cascade)
-  tasks   tasks[]
+  boards  Boards  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  tasks   Tasks[]
 }
 
-model tasks {
+model Tasks {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   columnId    String     @db.ObjectId
-  columns     columns    @relation(fields: [columnId], references: [id])
+  columns     Columns    @relation(fields: [columnId], references: [id])
   title       String
   description String
   status      String
-  subTasks    subTasks[]
+  subTasks    SubTasks[]
 }
 
-model subTasks {
+model SubTasks {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   taskId      String  @db.ObjectId
-  tasks       tasks   @relation(fields: [taskId], references: [id])
+  tasks       Tasks   @relation(fields: [taskId], references: [id])
   title       String
   isCompleted Boolean
 }
