@@ -1,6 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express'
 // import cors from 'cors'
 import dotenv from 'dotenv'
+
+import { boardRouter } from './v1/routes/boardRoutes'
+
 const bodyParser = require('body-parser')
 
 dotenv.config()
@@ -13,6 +16,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', (req: Request, res: Response) => {
   res.json({ message: 'Hello World' })
 })
+
+// Routes
+app.use('/api/v1/boards', boardRouter)
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const statusCode = err.statusCode || 500
