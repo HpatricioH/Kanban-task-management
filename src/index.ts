@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express'
-// import cors from 'cors'
+import cors from 'cors'
 import dotenv from 'dotenv'
 
 import { boardRouter } from './v1/routes/boardRoutes'
@@ -10,6 +10,9 @@ dotenv.config()
 
 const app = express()
 const PORT = parseInt(process.env.PORT as string, 10) || 5000
+
+// Middleware
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -26,9 +29,8 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   res.status(statusCode).json({ message: err.message })
 })
 
-// // Middleware
-// app.use(cors())
-
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port http://localhost:${PORT}`)
 })
+
+export default app

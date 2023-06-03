@@ -4,16 +4,11 @@
   "description": "API for Kanban Task Management app ",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.ts",
-    "build": "rimraf dist && tsc",
-    "ts.check": "tsc --project tsconfig.json",
-    "add-build": "git add dist"
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "vercel-build": "echo hello"
   },
-  "pre-commit": [
-    "ts.check",
-    "build",
-    "add-build"
-  ],
   "keywords": [],
   "author": "Patricio Huerta",
   "license": "ISC",
@@ -35,9 +30,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1",
-    "pre-commit": "^1.2.2",
     "prisma": "^4.14.1",
-    "rimraf": "^5.0.1",
     "typescript": "^5.0.4"
   },
   "prisma": {
