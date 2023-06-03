@@ -29,6 +29,6 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 // // Middleware
 // app.use(cors())
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
   console.log(`🚀 Server running on port http://localhost:${PORT}`)
 })
