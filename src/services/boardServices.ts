@@ -1,9 +1,14 @@
 import { PrismaClient } from '@prisma/client'
+
 const prisma = new PrismaClient()
 
 // get all boards from the database
 export const getBoards = async () => {
-  return await prisma.boards.findMany()
+  return await prisma.boards.findMany({
+    include: {
+      columns: true
+    }
+  })
 }
 
 // create a new board in the database

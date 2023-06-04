@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 
 import { boardRouter } from './v1/routes/boardRoutes'
+import { columnRouter } from './v1/routes/columnsRoutes'
 
 const bodyParser = require('body-parser')
 
@@ -22,6 +23,7 @@ app.get('/', (req: Request, res: Response) => {
 
 // Routes
 app.use('/api/v1/boards', boardRouter)
+app.use('/api/v1/columns', columnRouter)
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   const statusCode = err.statusCode || 500

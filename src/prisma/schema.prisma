@@ -19,25 +19,25 @@ model Boards {
 model Columns {
   id      String  @id @default(auto()) @map("_id") @db.ObjectId
   name    String
-  boardId String  @db.ObjectId
   boards  Boards  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  boardId String  @db.ObjectId
   tasks   Tasks[]
 }
 
 model Tasks {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  columnId    String     @db.ObjectId
-  columns     Columns    @relation(fields: [columnId], references: [id])
   title       String
   description String
   status      String
+  columns     Columns    @relation(fields: [columnId], references: [id])
+  columnId    String     @db.ObjectId
   subTasks    SubTasks[]
 }
 
 model SubTasks {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  taskId      String  @db.ObjectId
-  tasks       Tasks   @relation(fields: [taskId], references: [id])
   title       String
   isCompleted Boolean
+  tasks       Tasks   @relation(fields: [taskId], references: [id])
+  taskId      String  @db.ObjectId
 }
