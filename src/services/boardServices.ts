@@ -6,7 +6,15 @@ const prisma = new PrismaClient()
 export const getBoards = async () => {
   return await prisma.boards.findMany({
     include: {
-      columns: true
+      columns: {
+        include: {
+          tasks: {
+            include: {
+              subTasks: true
+            }
+          }
+        }
+      }
     }
   })
 }

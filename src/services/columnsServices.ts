@@ -7,6 +7,9 @@ export const createColumn = async (name:string, boardId:string) => {
     data: {
       name,
       boardId
+    },
+    include: {
+      tasks: true
     }
   })
 }

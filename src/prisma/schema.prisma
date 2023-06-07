@@ -19,18 +19,18 @@ model Boards {
 model Columns {
   id      String  @id @default(auto()) @map("_id") @db.ObjectId
   name    String
-  boards  Boards  @relation(fields: [boardId], references: [id], onDelete: Cascade)
-  boardId String  @db.ObjectId
+  boards  Boards? @relation(fields: [boardId], references: [id])
+  boardId String? @db.ObjectId
   tasks   Tasks[]
 }
 
 model Tasks {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
   title       String
-  description String
+  description String?
   status      String
-  columns     Columns    @relation(fields: [columnId], references: [id])
-  columnId    String     @db.ObjectId
+  columns     Columns?   @relation(fields: [columnId], references: [id])
+  columnId    String?    @db.ObjectId
   subTasks    SubTasks[]
 }
 
@@ -38,6 +38,6 @@ model SubTasks {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   isCompleted Boolean
-  tasks       Tasks   @relation(fields: [taskId], references: [id])
-  taskId      String  @db.ObjectId
+  tasks       Tasks?  @relation(fields: [taskId], references: [id])
+  taskId      String? @db.ObjectId
 }
