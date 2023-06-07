@@ -13,12 +13,14 @@ const dataError = [{
 export const createSubTask = async (req: Request, res: Response) => {
   try {
     const { title, isCompleted, taskId } = req.body
+    console.log(isCompleted)
     switch (true) {
       case !title:
         return res.status(400).json(dataError[0])
-      case !isCompleted:
+      case isCompleted === undefined:
         return res.status(400).json(dataError[1])
     }
+
     const subTask = await subTaskService.createSubTask(title, isCompleted, taskId)
     return res.status(201).json(subTask)
   } catch (error: any) {
