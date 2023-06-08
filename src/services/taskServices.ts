@@ -15,3 +15,12 @@ export const createTask = async (title: string, description: string, status: str
     }
   })
 }
+
+// delete task from the database
+export const deleteTask = async (id: string) => {
+  return await prisma.tasks.delete({
+    where: {
+      id
+    }
+  })
+}
