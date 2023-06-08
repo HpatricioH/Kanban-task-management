@@ -12,3 +12,14 @@ export const createColumn = async (req: Request, res: Response) => {
     return res.status(500).json({ message: error.message })
   }
 }
+
+export const deleteColumn = async (req:Request, res:Response) => {
+  try {
+    const { id } = req.params
+    if (!id) return res.status(400).json({ message: 'ID is required' })
+    await columnService.deleteColumn(id)
+    return res.status(200).json({ message: 'Column deleted' })
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message })
+  }
+}

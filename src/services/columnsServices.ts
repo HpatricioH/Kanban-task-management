@@ -13,3 +13,12 @@ export const createColumn = async (name:string, boardId:string) => {
     }
   })
 }
+
+// delete a column in the database
+export const deleteColumn = async (id:string) => {
+  return await prisma.columns.delete({
+    where: {
+      id
+    }
+  })
+}
