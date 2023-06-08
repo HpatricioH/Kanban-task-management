@@ -28,6 +28,18 @@ export const createBoard = async (name: string) => {
   })
 }
 
+// update a board in the database
+export const updateBoard = async (id: string, name: string) => {
+  return await prisma.boards.update({
+    where: {
+      id
+    },
+    data: {
+      name
+    }
+  })
+}
+
 // delete a board from the database
 export const deleteBoard = async (id: string) => {
   return await prisma.boards.delete({
