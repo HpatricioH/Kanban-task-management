@@ -16,6 +16,23 @@ export const createTask = async (title: string, description: string, status: str
   })
 }
 
+// update a task in the database for a specific column
+export const updateTask = async (id: string, title: string, description: string, status: string) => {
+  return await prisma.tasks.update({
+    where: {
+      id
+    },
+    data: {
+      title,
+      description,
+      status
+    },
+    include: {
+      subTasks: true
+    }
+  })
+}
+
 // delete task from the database
 export const deleteTask = async (id: string) => {
   return await prisma.tasks.delete({

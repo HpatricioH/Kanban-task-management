@@ -11,3 +11,16 @@ export const createSubTask = async (title: string, isCompleted: boolean, taskId:
     }
   })
 }
+
+// update a subTask in the database for a specific task
+export const updateSubTask = async (id: string, title: string, isCompleted: boolean) => {
+  return await prisma.subTasks.update({
+    where: {
+      id
+    },
+    data: {
+      title,
+      isCompleted
+    }
+  })
+}

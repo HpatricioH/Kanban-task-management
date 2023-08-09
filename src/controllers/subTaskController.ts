@@ -13,7 +13,7 @@ const dataError = [{
 export const createSubTask = async (req: Request, res: Response) => {
   try {
     const { title, isCompleted, taskId } = req.body
-    console.log(isCompleted)
+
     switch (true) {
       case !title:
         return res.status(400).json(dataError[0])
@@ -23,6 +23,26 @@ export const createSubTask = async (req: Request, res: Response) => {
 
     const subTask = await subTaskService.createSubTask(title, isCompleted, taskId)
     return res.status(201).json(subTask)
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+export const updateSubTask = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+    const { title, isCompleted } = req.body
+
+    switch (true) {
+      case !title:
+        return res.status(400).json(dataError[0])
+      case isCompleted === undefined:
+        return res.status(400).json(dataError[1])
+    }
+
+    const subtaskUpdated = await subTaskService.updateSubTask(id, title, isCompleted)
+
+    return res.status(200).json(subtaskUpdated)
   } catch (error: any) {
     return res.status(500).json({ message: error.message })
   }
