@@ -47,3 +47,13 @@ export const updateSubTask = async (req: Request, res: Response) => {
     return res.status(500).json({ message: error.message })
   }
 }
+
+export const deleteSubTask = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+    const subTask = await subTaskService.deleteSubTask(id)
+    return res.status(200).json(subTask)
+  } catch (error:any) {
+    return res.status(500).json({ message: error.message })
+  }
+}

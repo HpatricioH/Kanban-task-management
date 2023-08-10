@@ -24,3 +24,12 @@ export const updateSubTask = async (id: string, title: string, isCompleted: bool
     }
   })
 }
+
+// delete subTask from the database
+export const deleteSubTask = async (id: string) => {
+  return await prisma.subTasks.delete({
+    where: {
+      id
+    }
+  })
+}
