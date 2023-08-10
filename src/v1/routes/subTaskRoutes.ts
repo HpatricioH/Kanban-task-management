@@ -5,4 +5,4 @@ export const subTaskRouter = express.Router()
 
 subTaskRouter.post('/', subTaskController.createSubTask)
 subTaskRouter.put('/task/:taskId/subtask/:id', subTaskController.updateSubTask)
-subTaskRouter.delete('/subtask/:id', subTaskController.deleteSubTask)
+subTaskRouter.delete('/:id', subTaskController.deleteSubTask)
