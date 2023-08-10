@@ -17,7 +17,7 @@ export const createTask = async (title: string, description: string, status: str
 }
 
 // update a task in the database for a specific column
-export const updateTask = async (id: string, title: string, description: string, status: string) => {
+export const updateTask = async (id: string, title: string, description: string, status: string, columnId: string) => {
   return await prisma.tasks.update({
     where: {
       id
@@ -25,7 +25,8 @@ export const updateTask = async (id: string, title: string, description: string,
     data: {
       title,
       description,
-      status
+      status,
+      columnId
     },
     include: {
       subTasks: true

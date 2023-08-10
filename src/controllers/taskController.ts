@@ -35,7 +35,7 @@ export const createTask = async (req: Request, res: Response) => {
 export const updateTask = async (req: Request, res: Response) => {
   try {
     const { id } = req.params
-    const { title, description, status } = req.body
+    const { title, description, status, columnId } = req.body
 
     switch (true) {
       case !title:
@@ -46,7 +46,7 @@ export const updateTask = async (req: Request, res: Response) => {
         return res.status(400).json(dataError[2])
     }
 
-    const updatedTask = await taskService.updateTask(id, title, description, status)
+    const updatedTask = await taskService.updateTask(id, title, description, status, columnId)
     return res.status(200).json(updatedTask)
   } catch (error: any) {
     return res.status(500).json({ message: error.message })
