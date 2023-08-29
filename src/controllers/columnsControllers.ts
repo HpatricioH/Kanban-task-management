@@ -13,6 +13,18 @@ export const createColumn = async (req: Request, res: Response) => {
   }
 }
 
+export const updateColumn = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+    const { name } = req.body
+    if (!id) return res.status(400).json({ message: 'ID is required' })
+    const column = await columnService.updateColumn(id, name)
+    return res.status(200).json(column)
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+
 export const deleteColumn = async (req:Request, res:Response) => {
   try {
     const { id } = req.params

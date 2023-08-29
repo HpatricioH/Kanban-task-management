@@ -14,6 +14,18 @@ export const createColumn = async (name:string, boardId:string) => {
   })
 }
 
+// update a column in the database
+export const updateColumn = async (id:string, name:string) => {
+  return await prisma.columns.update({
+    where: {
+      id
+    },
+    data: {
+      name
+    }
+  })
+}
+
 // delete a column in the database
 export const deleteColumn = async (id:string) => {
   return await prisma.columns.delete({
